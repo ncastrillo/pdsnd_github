@@ -19,18 +19,18 @@ def get_filters():
     city = ""
     month = ""
     day = ""
-    
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+
+    # TO-DO-1: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while city not in ('chicago', 'new york city', 'washington'):
         city = input("Select a city (chicago, new york city or washington): ")
         city = city.lower()
 
-    # TO DO: get user input for month (all, january, february, ... , june)
+    # TO-DO-2: get user input for month (all, january, february, ... , june)
     while month not in ('all', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'):
         month = input("Select a month to analize (all, january, february, ... , june, july, ..., december): ")
         month = month.lower()
 
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
+    # TO-DO-3: get user input for day of week (all, monday, tuesday, ... sunday)
     while day not in ('all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'):
         day = input("Select a day of week to analize (all, monday, tuesday, ... , sunday): ")
         day = day.lower()
@@ -53,17 +53,17 @@ def load_data(city, month, day):
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
     df['city'] = city
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.day_name()
-    
+
     # extract hour from the Start Time column to create an hour column
     df['start_hour'] = df['Start Time'].dt.hour
-    
+
     # extract combinations of Start and End statios to create an hour column
     df['StartEnd Stations'] = df['Start Station']+" -> "+df['End Station']
 
@@ -81,7 +81,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-        
+
     return df
 
 def time_stats(df):
@@ -90,17 +90,17 @@ def time_stats(df):
     print('\nCalculating The Most Frequent Times of Travel for the filters selected...\n')
     start_time = time.time()
 
-    # TO DO: display the most common month
+    # TO-DO-4: display the most common month
     most_common_month = df['month'].mode()[0]
     print('The most common month (from 1 to 12) is: ', most_common_month)
     list_month = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
     print('\t which is: ', list_month[most_common_month-1])
 
-    # TO DO: display the most common day of week
+    # TO-DO-5: display the most common day of week
     most_common_day = df['day_of_week'].mode()[0]
     print('The most common day of week is: ', most_common_day)
 
-    # TO DO: display the most common start hour
+    # TO-DO-6: display the most common start hour
     most_common_start_hour = df['start_hour'].mode()[0]
     print('The most common start hour (from 0 to 23) is: ', most_common_start_hour)
 
@@ -114,15 +114,15 @@ def station_stats(df):
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
-    # TO DO: display most commonly used start station
+    # TO-DO-7: display most commonly used start station
     most_common_start_station = df['Start Station'].mode()[0]
     print('The most commonly used start station: ', most_common_start_station)
 
-    # TO DO: display most commonly used end station
+    # TO-DO-8: display most commonly used end station
     most_common_end_station = df['End Station'].mode()[0]
     print('The most commonly used end station: ', most_common_end_station)
 
-    # TO DO: display most frequent combination of start station and end station trip
+    # TO-DO-9: display most frequent combination of start station and end station trip
     most_common_combination = df['StartEnd Stations'].mode()[0]
     print('The most frequent combination of start station and end station trip: ', most_common_combination)
 
@@ -136,7 +136,7 @@ def trip_duration_stats(df):
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
-    # TO DO: display total travel time
+    # TO-DO-10: display total travel time
     total_time = df['Trip Duration'].sum()
     print('Total travel time for selected filters: ', total_time, 'seconds.')
     # get days, hours, mins and seconds of the total_seconds
@@ -145,7 +145,7 @@ def trip_duration_stats(df):
     ddt, hht= divmod(hht, 24)
     print('\t which are: ', ddt, 'Days', hht, 'Hours', mmt, 'Minutes', sst, 'Seconds')
 
-    # TO DO: display mean travel time
+    # TO-DO-11: display mean travel time
     mean_time = df['Trip Duration'].mean()
     print('Mean travel time for selected filters: ', mean_time, 'seconds.')
     # get days, hours, mins, seconds
@@ -164,12 +164,12 @@ def user_stats(df):
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
-    # TO DO: Display counts of user types
+    # TO-DO-12: Display counts of user types
     user_types = df['User Type'].value_counts()
     print('Counts of user types: \n', user_types)
     print('\n')
-    
-    # TO DO: Display counts of gender
+
+    # TO-DO-13: Display counts of gender
     if df['city'].max() == 'washington':
         print('The washington dataset doesn\'t have Gender and Birth Year data')
     else:
@@ -177,7 +177,7 @@ def user_stats(df):
         print('Counts of gender: \n', gender_count)
         print('\n')
 
-        # TO DO: Display earliest, most recent, and most common year of birth
+        # TO-DO-14: Display earliest, most recent, and most common year of birth
         birth_earliest = df['Birth Year'].min()
         print('The earliest year of birth is: ', birth_earliest)
         birth_recent = df['Birth Year'].max()
@@ -201,14 +201,14 @@ def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-      
+
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
+
         rows_data(df)
-        
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break

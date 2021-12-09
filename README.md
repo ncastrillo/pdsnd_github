@@ -7,10 +7,10 @@
 Naiara's project
 
 ### Description
-Describe what your project is about and what it does
+My project is about an stadistic analysis of the use of bike sharing service in Chicago, NY and Washington.
 
 ### Files used
-Include the files used
+The three files used are: chicago.csv, washington.csv and new_york_city.csv.
 
 ### Credits
 It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.

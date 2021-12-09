@@ -20,17 +20,17 @@ def get_filters():
     month = ""
     day = ""
 
-    # TO-DO-1: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    # 1st TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while city not in ('chicago', 'new york city', 'washington'):
         city = input("Select a city (chicago, new york city or washington): ")
         city = city.lower()
 
-    # TO-DO-2: get user input for month (all, january, february, ... , june)
+    # 2nd TO DO: get user input for month (all, january, february, ... , june)
     while month not in ('all', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'):
         month = input("Select a month to analize (all, january, february, ... , june, july, ..., december): ")
         month = month.lower()
 
-    # TO-DO-3: get user input for day of week (all, monday, tuesday, ... sunday)
+    # 3rd TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     while day not in ('all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'):
         day = input("Select a day of week to analize (all, monday, tuesday, ... , sunday): ")
         day = day.lower()

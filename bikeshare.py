@@ -19,18 +19,18 @@ def get_filters():
     city = ""
     month = ""
     day = ""
-    
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+
+    # 1st TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while city not in ('chicago', 'new york city', 'washington'):
         city = input("Select a city (chicago, new york city or washington): ")
         city = city.lower()
 
-    # TO DO: get user input for month (all, january, february, ... , june)
+    # 2nd TO DO: get user input for month (all, january, february, ... , june)
     while month not in ('all', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'):
         month = input("Select a month to analize (all, january, february, ... , june, july, ..., december): ")
         month = month.lower()
 
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
+    # 3rd TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     while day not in ('all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'):
         day = input("Select a day of week to analize (all, monday, tuesday, ... , sunday): ")
         day = day.lower()
@@ -53,17 +53,17 @@ def load_data(city, month, day):
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
     df['city'] = city
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.day_name()
-    
+
     # extract hour from the Start Time column to create an hour column
     df['start_hour'] = df['Start Time'].dt.hour
-    
+
     # extract combinations of Start and End statios to create an hour column
     df['StartEnd Stations'] = df['Start Station']+" -> "+df['End Station']
 
@@ -81,7 +81,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-        
+
     return df
 
 def time_stats(df):
@@ -168,7 +168,7 @@ def user_stats(df):
     user_types = df['User Type'].value_counts()
     print('Counts of user types: \n', user_types)
     print('\n')
-    
+
     # TO DO: Display counts of gender
     if df['city'].max() == 'washington':
         print('The washington dataset doesn\'t have Gender and Birth Year data')
@@ -201,14 +201,14 @@ def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-      
+
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        
+
         rows_data(df)
-        
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break

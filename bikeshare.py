@@ -169,7 +169,7 @@ def user_stats(df):
     print('Counts of user types: \n', user_types)
     print('\n')
 
-    # TO DO: Display counts of gender
+    # last TO DO1: Display counts of gender
     if df['city'].max() == 'washington':
         print('The washington dataset doesn\'t have Gender and Birth Year data')
     else:
@@ -177,7 +177,7 @@ def user_stats(df):
         print('Counts of gender: \n', gender_count)
         print('\n')
 
-        # TO DO: Display earliest, most recent, and most common year of birth
+        # last TO DO2: Display earliest, most recent, and most common year of birth
         birth_earliest = df['Birth Year'].min()
         print('The earliest year of birth is: ', birth_earliest)
         birth_recent = df['Birth Year'].max()

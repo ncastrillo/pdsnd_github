@@ -14,3 +14,4 @@ The three files used are: chicago.csv, washington.csv and new_york_city.csv.
 
 ### Credits
 It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+My inspiration has been the udacity course: https://classroom.udacity.com/nanodegrees/nd104/parts/cd0419
